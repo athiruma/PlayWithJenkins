@@ -32,19 +32,15 @@ pipeline {
                         def s3_bucket = credentials("${account}-s3-bucket")
                         def account_name = "${account}"
                         echo "Account Name: $account_name"
-                        echo "$s3_bucket"
-                        env.access_key = access_key
-                        env.secret_key = secret_key
-                        env.s3_bucket = s3_bucket
-                        env.account_name = account_name
-                        sh '''
-                        export access_key="$access_key"
-                        export secret_key="$secret_key"
-                        export s3_bucket="$s3_bucket"
-                        export account_name="$account_name"
-                        echo "$account_name"
-                        python3 test.py
-                        '''
+
+                        withCredentials([string(credentialsId: 'appeng-aws-access-key-id', variable: 'access_key'),
+                                         string(credentials: 'appeng-aws-secret-key-id', variable: 'secret_key'),
+                                         string(credentialsId: 'appeng-s3-bucket', variable: 's3_bucket'),
+                                         string(credentialsId: 'appeng-s3-bucket', variable: 's3_bucket')
+                                        ]) {
+                            echo "$s3_bucket"
+                            
+                        }
                     }
                 }
             }
