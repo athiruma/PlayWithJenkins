@@ -15,6 +15,8 @@ pipeline {
         account_name = "coreos-training"
         contact1 = "ebattat@redhat.com"
         contact2 = "athiruma@redhat.com"
+        ES_HOST = credentials('haim-cloud-governance-elasticsearch-url')
+        ES_PORT = credentials('haim-cloud-governance-elasticsearch-port')
     }
     stages {
         stage('Checkout') { // Checkout (git clone ...) the projects repository
@@ -26,7 +28,10 @@ pipeline {
             steps{
                 script {
                     for (def account in accountList) {
-                        env.account = credentials("${account}-s3-bucket")
+                        env.access_key = credentials('${account}-aws-access-key-id')
+                        env.secret_key = credentials('${account}-aws-secret-key-id')
+                        env.s3_bucket = credentials('${account}-s3-bucket')
+                        env.account_name = "${account}"
                         sh 'python3 test.py'
                         
                     }
