@@ -17,6 +17,11 @@ pipeline {
         contact2 = "athiruma@redhat.com"
     }
     stages {
+        stage('Checkout') { // Checkout (git clone ...) the projects repository
+           steps {
+                 checkout scm
+           }
+        }
         stage('Iterate the loop'){
             steps{
                 script {
