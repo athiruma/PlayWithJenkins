@@ -28,14 +28,22 @@ pipeline {
             steps{
                 script {
                     for (def account in accountList) {
-                        environment {
-                            access_key = credentials("${account}-aws-access-key-id")
-                            secret_key = credentials("${account}-aws-secret-key-id")
-                            s3_bucket = credentials("${account}-s3-bucket")
-                            account_name = "${account}"
+                        def access_key = credentials("${account}-aws-access-key-id")
+                        def secret_key = credentials("${account}-aws-secret-key-id")
+                        def s3_bucket = credentials("${account}-s3-bucket")
+                        def account_name = "${account}"
+                        
+                        echo "Account Name: $account_name"
+                        
+                        withCredentials([
+                            string(credentialsId: access_key, variable: 'AWS_ACCESS_KEY_ID'),
+                            string(credentialsId: secret_key, variable: 'AWS_SECRET_ACCESS_KEY'),
+                            string(credentialsId: s3_bucket, variable: 's3_bucket'),
+                            string(credentialsId: account_name, variable: 'account_name')
+                        ]) {
+                            sh 'echo $account_name'
+                            sh 'python3 test.py'
                         }
-                        sh "echo $account_name"
-                        sh 'python3 test.py'
                         
                     }
                 }
