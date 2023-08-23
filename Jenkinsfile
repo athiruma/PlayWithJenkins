@@ -34,7 +34,7 @@ pipeline {
                         echo "Account Name: $account_name"
                         env.access_key = access_key
                         env.secret_key = secret_key
-                        env.s3_bucket = s3_buclet
+                        env.s3_bucket = s3_bucket
                         env.account_name = account_name
                         sh '''
                         export access_key="$access_key"
