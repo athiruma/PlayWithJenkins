@@ -12,7 +12,6 @@ pipeline {
     }
     environment {
         LDAP_HOST_NAME = credentials('cloud-governance-ldap-host-name')
-        account_name = "coreos-training"
         contact1 = "ebattat@redhat.com"
         contact2 = "athiruma@redhat.com"
         ES_HOST = credentials('haim-cloud-governance-elasticsearch-url')
@@ -32,13 +31,13 @@ pipeline {
                         def secret_key = credentials("${account}-aws-secret-key-id")
                         def s3_bucket = credentials("${account}-s3-bucket")
                         def account_name = "${account}"
-                        
+                        echo "Account Name: $account_name"
                         sh '''
-                        export access_key=$access_key
-                        export secret_key=$secret_key
-                        export s3_bucket=$s3_bucket
-                        export account_name=$account_name
-                        echo $account_name
+                        export access_key="$access_key"
+                        export secret_key="$secret_key"
+                        export s3_bucket="$s3_bucket"
+                        export account_name="$account_name"
+                        echo "$account_name"
                         python3 test.py
                         '''
                     }
