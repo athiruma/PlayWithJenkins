@@ -26,7 +26,7 @@ pipeline {
             steps{
                 script {
                     for (def account in accountList) {
-                        env.account = '${account.toUpperCase()}'
+                        env.account = "${account.toUpperCase()}"
                         sh 'python3 test.py'
                         
                     }
