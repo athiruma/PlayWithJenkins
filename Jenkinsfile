@@ -26,7 +26,7 @@ pipeline {
             steps{
                 script {
                     for (def account in accountList) {
-                        env.account = credentials("${account.toUpperCase()}-s3-bucket")
+                        env.account = credentials("${account}-s3-bucket")
                         sh 'python3 test.py'
                         
                     }
