@@ -35,16 +35,14 @@ pipeline {
                         
                         echo "Account Name: $account_name"
                         
-                        // withCredentials([
-                        //     string(credentialsId: access_key, variable: 'access_key'),
-                        //     string(credentialsId: secret_key, variable: 'secret_key'),
-                        //     string(credentialsId: s3_bucket, variable: 's3_bucket'),
-                        //     string(credentialsId: account_name, variable: 'account_name')
-                        // ]) {
-                        //     sh 'echo $account_name'
-                        //     sh 'python3 test.py'
-                        // }
-                        
+                        environment {
+                            access_key = access_key
+                            secret_key = secret_key
+                            s3_bucket = s3_bucket
+                            account_name = account_name
+                        }
+                        sh 'echo $account_name'
+                        sh 'python3 test.py'
                     }
                 }
             }
