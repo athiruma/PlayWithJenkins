@@ -28,7 +28,7 @@ pipeline {
             steps{
                 script {
                     for (def account in accountList) {
-                        environment{
+                        environment {
                             access_key = credentials("${account}-aws-access-key-id")
                             secret_key = credentials("${account}-aws-secret-key-id")
                             s3_bucket = credentials("${account}-s3-bucket")
