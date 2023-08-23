@@ -27,7 +27,7 @@ pipeline {
             steps{
                 script {
                     for (def account in accountList) {
-                        echo "Account Name: $account_name"
+                        echo "Account Name: $account"
                         withCredentials([string(credentialsId: "${account}-aws-access-key-id", variable: 'access_key'),
                                         string(credentialsId: "${account}-aws-secret-key-id", variable: 'secret_key'),
                                         string(credentialsId: "${account}-s3-bucket", variable: 's3_bucket')]) {
