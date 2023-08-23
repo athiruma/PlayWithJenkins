@@ -32,6 +32,7 @@ pipeline {
                         def s3_bucket = credentials("${account}-s3-bucket")
                         def account_name = "${account}"
                         echo "Account Name: $account_name"
+                        echo "$s3_bucket"
                         env.access_key = access_key
                         env.secret_key = secret_key
                         env.s3_bucket = s3_bucket
