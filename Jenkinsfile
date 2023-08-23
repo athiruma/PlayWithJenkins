@@ -1,4 +1,4 @@
-def accountList = ['appeng', 'test']
+def accountList = ['appeng']
 pipeline {
     options {
         disableConcurrentBuilds()
