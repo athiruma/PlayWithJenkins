@@ -35,6 +35,7 @@ pipeline {
                         withCredentials([string(credentialsId: "${account}-aws-access-key-id", variable: 'access_key'),
                                         string(credentialsId: "${account}-aws-secret-key-id", variable: 'secret_key'),
                                         string(credentialsId: "${account}-s3-bucket", variable: 's3_bucket')]) {
+                            env.account_name = "$account"
                             sh 'python3 test.py'
                         }
                        
