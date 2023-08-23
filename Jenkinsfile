@@ -36,8 +36,8 @@ pipeline {
                         echo "Account Name: $account_name"
                         
                         withCredentials([
-                            string(credentialsId: access_key, variable: 'AWS_ACCESS_KEY_ID'),
-                            string(credentialsId: secret_key, variable: 'AWS_SECRET_ACCESS_KEY'),
+                            string(credentialsId: access_key, variable: 'access_key'),
+                            string(credentialsId: secret_key, variable: 'secret_key'),
                             string(credentialsId: s3_bucket, variable: 's3_bucket'),
                             string(credentialsId: account_name, variable: 'account_name')
                         ]) {
